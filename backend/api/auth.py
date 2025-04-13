@@ -1,17 +1,11 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from schemas.auth import LoginRequest
 
 router = APIRouter()
 
-# GET route
 @router.get("/hello")
-def say_hello():
-    return {"message": "👋 Hello from the auth router!"}
-
-# POST route
-class LoginRequest(BaseModel):
-    username: str
-    password: str
+def hello():
+    return {"message": "👋 Hello"}
 
 @router.post("/login")
 def login(request: LoginRequest):

@@ -1,19 +1,19 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from schemas.analyze import AnalysisRequest
 from models.lfm_infer import run_model
+from db.supabase import supabase
 
 router = APIRouter()
 
-class AnalysisRequest(BaseModel):
-    user_id: str
-    data: list[float]
-
 @router.post("/")
 def analyze(request: AnalysisRequest):
+    # Use your actual model function
     result = run_model(request.data)
-    return {"params": result} 
+    # Store in Supabase
+    supabase.table("analysis_history").insert({
+        "user_id": request.user_id,
+        "data": request.data,
+        "alpha": result["alpha"]
+    }).execute()
 
-
-@router.get("/hello")
-def say_hello():
-    return {"message": "👋 Hello from the backend!"}
+    return {"params": result}
