@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.analyze import router as analyze_router
-
-from api.auth import router as auth_router  # ✅ New router
+from api.auth import router as auth_router  #  New router
+from api.history import router as history_router
 
 app = FastAPI()
 
@@ -15,4 +15,6 @@ app.add_middleware(
 )
 
 app.include_router(analyze_router, prefix="/api") 
-app.include_router(auth_router, prefix="/auth")    # ✅ New
+app.include_router(auth_router, prefix="/auth")    #  New
+#history router to get the history of the user 
+app.include_router(history_router, prefix="/history")

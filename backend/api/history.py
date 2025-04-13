@@ -7,6 +7,7 @@ router = APIRouter()
 
 @router.get("/", response_model=List[HistoryRecord])
 def get_user_history(user_id: str = Query(..., description="The ID of the user")):
+    print("🚀 /history/ endpoint triggered for", user_id)
     result = supabase \
         .table("analysis_history") \
         .select("*") \
