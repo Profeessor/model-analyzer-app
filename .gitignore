@@ -1,0 +1,21 @@
+# Frontend
+node_modules/
+.nuxt/
+.output/
+.env
+dist/
+
+# Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+*.so
+.Python
+.DS_Store
+
+# Model checkpoints
+*.pt
+*.pkl
+*.bin 
